@@ -1,0 +1,54 @@
+packages:
+    -*jwt
+    -*bcryptJs
+    -*express-Validator
+    -*cookieParser
+    -*multer
+    -*helmet
+    -*expressRateLimiter
+    -*httpStatusCodes
+    -*joi
+    -*morgan
+    -*expressAsyncErrors
+    -*expressMongoSanitize
+    -*dotEnv
+    -*mongoose
+
+models:
+    -credentials
+    -order
+    -review
+    -product
+
+controller:
+    >Auth
+        -login
+        -logout
+        -register
+        -verifiedUser
+
+    >Order
+        -create
+        -getAll
+        -getSingle
+        -update
+
+    >Product
+        -creteProd
+        -delete
+        -update
+        -getAll
+        -getSingle
+        -UploadImage
+
+    >Review
+        -crete
+        -delete
+        -getAll
+        -getOne
+        -update
+
+    >user
+        -getAll
+        -getOne
+        -currentUser
