@@ -52,3 +52,91 @@ controller:
         -getAll
         -getOne
         -currentUser
+
+
+dbdiagram.io:
+Table User {
+  _id ObjectId [pk]
+  username string
+  email string [unique]
+  password string
+  role string
+  createdAt datetime
+  updatedAt datetime
+  verified boolean
+  profileImage string
+  gender string
+}
+
+Table Product {
+  _id ObjectId [pk]
+  name string
+  description string
+  price float
+  stock int
+  category enum ["Consumable", "NonConsumable"]
+  image string[]  // Array of image URLs
+  company string
+}
+
+Table Review {
+  _id ObjectId [pk]
+  user ObjectId [ref: > User._id]
+  product ObjectId [ref: > Product._id]
+  rating float
+  comment string
+  createdAt datetime
+  updatedAt datetime
+}
+
+Table Order {
+  _id ObjectId [pk]
+  user ObjectId [ref: > User._id]
+  paymentMethod string
+  totalPrice float
+  isPaid boolean
+  paidAt datetime
+  isDelivered boolean
+  deliveredAt datetime
+  couponCode ObjectId [ref: > Coupon._id]
+}
+
+Table OrderItem {
+  _id ObjectId [pk]
+  order ObjectId [ref: > Order._id]
+  product ObjectId [ref: > Product._id]
+  quantity int
+}
+
+Table ShippingAddress {
+  _id ObjectId [pk]
+  order ObjectId [ref: > Order._id]
+  address string
+  city string
+  postalCode string
+  country string
+}
+
+Table Coupon {
+  _id ObjectId [pk]
+  code string [unique]
+  description string
+  discountType enum ["percentage", "flat"]
+  discountValue float
+  productType string
+  minOrderValue float
+  maxDiscount float
+  usageLimit int
+  expiryDate datetime
+  isActive boolean
+  createdAt datetime
+  updatedAt datetime
+}
+
+Ref: User._id < Review.user
+Ref: Product._id < Review.product
+Ref: User._id < Order.user
+Ref: Order._id < OrderItem.order
+Ref: Product._id < OrderItem.product
+Ref: Order._id < ShippingAddress.order
+Ref: Coupon._id < Order.couponCode
