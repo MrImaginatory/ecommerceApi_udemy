@@ -10,6 +10,7 @@ const generateToken = (user) => {
             userEmail: user.email,
             userName: user.username,
             _id: user._id,
+            role:user.role,
             verifiedUser:user.verified
         },
         process.env.JWT_SECRET,
@@ -18,8 +19,8 @@ const generateToken = (user) => {
 };
 
 const login = asyncWrapper(async (req, res) => {
-    const { email, password } = req.body;
-    const user = await userSchema.findOne({ email });
+    const { username, email, password } = req.body;
+    const user = await userSchema.findOne({ username, email });
     
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
@@ -83,12 +84,6 @@ const logout = asyncWrapper(async (req, res) => {
     return res.status(200).json({ message: 'Logout successful' }); 
 });
 
-const testRoute = asyncWrapper(async (req, res) => {
-    const data = req.user;
-    return res.status(200).json({ message: 'This is a test route',data });
-
-})
-
 const verifyUser = asyncWrapper(async (req, res) => {
     const token = req.query.token;
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -113,4 +108,4 @@ const verifyUser = asyncWrapper(async (req, res) => {
 
 });
 
-export { login, register, logout, testRoute, verifyUser };
+export { login, register, logout, verifyUser };

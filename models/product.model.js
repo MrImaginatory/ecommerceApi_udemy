@@ -63,10 +63,10 @@ const productSchema = new mongoose.Schema({
         min: 0,
         max: 5,
     },
-    review: {
-        type: mongoose.Types.ObjectId,
-        ref: "Review",
-    },
+    reviews: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Review"
+}]
 });
 
 export default mongoose.model("Product", productSchema);

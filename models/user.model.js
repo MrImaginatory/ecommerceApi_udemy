@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        minlength:2,
+        minlength: 2,
         trim: true
     },
     email: {
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength:8,
+        minlength: 8,
     },
     role: {
         type: String,
@@ -37,11 +37,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    profileImage:{
+    profileImage: {
         type: String,
         default: "https://res.cloudinary.com/dnbveg7fm/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1746773712/profile-user-svgrepo-com_jznmzq.svg"
     },
-    gender:{
+    gender: {
         type: String,
         enum: ["male", "female", "other"],
         default: "other"
@@ -49,23 +49,23 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  } catch (error) {
-    next(error);
-  }
+    if (!this.isModified('password')) return next();
+    try {
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
-userSchema.methods.comparePassword = async function(userPassword){
-    return await bcrypt.compare(userPassword,this.password);
+userSchema.methods.comparePassword = async function (userPassword) {
+    return await bcrypt.compare(userPassword, this.password);
 };
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
 
-export default mongoose.model("User",userSchema);
+export default mongoose.model("User", userSchema);

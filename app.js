@@ -4,12 +4,16 @@ import ApiError from './utils/apiError.utils.js';
 import errorHandler from './middlewares/globalError.middleware.js';
 import helmet from 'helmet';
 import cors from 'cors';
-import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
+
+// routesImport
+import authRouter from './routes/auth.route.js';
 import userRouter from './routes/user.route.js';
+import productRouter from './routes/product.route.js';
+import reviewRouter from './routes/review.route.js';
 
 const __dirname = import.meta.dirname;
 const app = express();
@@ -28,6 +32,8 @@ app.use(morgan('combined',{stream: accessLogs}));
 // Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/product', productRouter);
+app.use('/api/v1/review',reviewRouter);
 
 // Created middlewares
 app.use((req, res, next) => {
