@@ -1,0 +1,465 @@
+openapi: 3.0.0
+info:
+  title: Ecommerce API
+  version: 1.0.0
+  description: OpenAPI documentation generated from Postman Collection
+
+servers:
+  - url: http://localhost:5000/api/v1
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                gender:
+                  type: string
+              required: [username, email, password]
+      responses:
+        '201':
+          description: User registered
+
+  /auth/login:
+    post:
+      summary: Login user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required: [email, password]
+      responses:
+        '200':
+          description: Login successful
+
+  /auth/logout:
+    post:
+      summary: Logout user
+      tags: [Auth]
+      responses:
+        '200':
+          description: Logout successful
+
+  /auth/test:
+    get:
+      summary: Test route
+      tags: [Auth]
+      responses:
+        '200':
+          description: Test success
+
+  /user/update:
+    put:
+      summary: Update user details
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                gender:
+                  type: string
+      responses:
+        '200':
+          description: User updated
+
+  /user/deleteUser:
+    delete:
+      summary: Delete a user
+      tags: [User]
+      responses:
+        '200':
+          description: User deleted
+
+  /product/create:
+    post:
+      summary: Create a product
+      tags: [Product]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                stock:
+                  type: integer
+                category:
+                  type: string
+      responses:
+        '201':
+          description: Product created
+
+  /product/products:
+    get:
+      summary: Get all products
+      tags: [Product]
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of products
+
+  /product/update/{id}:
+    put:
+      summary: Update a product
+      tags: [Product]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                stock:
+                  type: integer
+                category:
+                  type: string
+      responses:
+        '200':
+          description: Product updated
+
+  /product/product/{id}:
+    get:
+      summary: Get a single product
+      tags: [Product]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product details
+
+  /product/delete/{id}:
+    delete:
+      summary: Delete a product
+      tags: [Product]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product deleted
+
+  /coupon/createCoupon:
+    post:
+      summary: Create a coupon
+      tags: [Coupon]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                description:
+                  type: string
+                discountType:
+                  type: string
+                discountValue:
+                  type: number
+                productType:
+                  type: string
+                minOrderValue:
+                  type: number
+                maxDiscount:
+                  type: number
+                usageLimit:
+                  type: integer
+                expiryDate:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: Coupon created
+
+  /coupon/updateCoupon/{id}:
+    put:
+      summary: Update a coupon
+      tags: [Coupon]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                description:
+                  type: string
+                discountType:
+                  type: string
+                discountValue:
+                  type: number
+                productType:
+                  type: string
+                minOrderValue:
+                  type: number
+                maxDiscount:
+                  type: number
+                usageLimit:
+                  type: integer
+                expiryDate:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Coupon updated
+
+  /coupon/deleteCoupon/{id}:
+    delete:
+      summary: Delete a coupon
+      tags: [Coupon]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Coupon deleted
+
+  /coupon/couponDetails/{id}:
+    get:
+      summary: Get a coupon's details
+      tags: [Coupon]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Coupon details
+
+  /coupon/coupons:
+    get:
+      summary: Get all coupons
+      tags: [Coupon]
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of coupons
+
+  /review/product/{productId}/postReview:
+    post:
+      summary: Post a review for a product
+      tags: [Review]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                comment:
+                  type: string
+      responses:
+        '201':
+          description: Review posted
+
+  /review/product/{productId}/review/{reviewId}:
+    parameters:
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: reviewId
+        required: true
+        schema:
+          type: string
+    put:
+      summary: Update a product review
+      tags: [Review]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                comment:
+                  type: string
+      responses:
+        '200':
+          description: Review updated
+
+    get:
+      summary: Get specific product review
+      tags: [Review]
+      responses:
+        '200':
+          description: Review details
+
+
+  /review/product/{productId}:
+    get:
+      summary: Get all reviews for a product
+      tags: [Review]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of reviews
+
+  /review/productReview:
+    get:
+      summary: Get all product reviews
+      tags: [Review]
+      responses:
+        '200':
+          description: All reviews
+
+  /order/createOrder:
+    post:
+      summary: Create a new order
+      tags: [Order]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderItems:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product:
+                        type: string
+                      quantity:
+                        type: integer
+                shippingAddress:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    city:
+                      type: string
+                    postalCode:
+                      type: string
+                    country:
+                      type: string
+                paymentMethod:
+                  type: string
+                totalPrice:
+                  type: number
+      responses:
+        '201':
+          description: Order created
+
+  /order/viewOrder/{id}:
+    get:
+      summary: View order by ID
+      tags: [Order]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order details
+
+  /order/orders:
+    get:
+      summary: Get all orders
+      tags: [Order]
+      responses:
+        '200':
+          description: List of orders
