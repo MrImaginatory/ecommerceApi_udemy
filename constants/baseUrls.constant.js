@@ -1,3 +1,3 @@
-const authBaseUrl = `http://localhost:${process.env.PORT}/api/v1/auth/`;
+const apiVersion = `/api/v1`;
 
-export default authBaseUrl;
+export default apiVersion;

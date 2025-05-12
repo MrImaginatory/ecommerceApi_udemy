@@ -8,12 +8,14 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
+import apiVersion from './constants/baseUrls.constant.js';
 
 // routesImport
 import authRouter from './routes/auth.route.js';
 import userRouter from './routes/user.route.js';
 import productRouter from './routes/product.route.js';
 import reviewRouter from './routes/review.route.js';
+import couponRouter from './routes/coupon.route.js';
 
 const __dirname = import.meta.dirname;
 const app = express();
@@ -30,10 +32,11 @@ const accessLogs = fs.createWriteStream(path.join(__dirname,'access.log'), { fla
 app.use(morgan('combined',{stream: accessLogs}));
 
 // Routes
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/product', productRouter);
-app.use('/api/v1/review',reviewRouter);
+app.use(`${apiVersion}/auth`, authRouter);
+app.use(`${apiVersion}/user`, userRouter);
+app.use(`${apiVersion}/product`, productRouter);
+app.use(`${apiVersion}/review`,reviewRouter);
+app.use(`${apiVersion}/coupon`,couponRouter)
 
 // Created middlewares
 app.use((req, res, next) => {

@@ -1,6 +1,7 @@
 import reviewSchema from '../models/review.model.js';
 import asyncWrapper from '../utils/asyncWrapper.utils.js';
 import productSchema from '../models/product.model.js';
+import orderSchema from '../models/order.model.js'
 
 const postReview = asyncWrapper(async (req, res) => {
     const userId = req.user._id;
@@ -16,7 +17,7 @@ const postReview = asyncWrapper(async (req, res) => {
         return res.status(400).json({ message: "Rating and comment are required." });
     }
 
-    const hasPurchased = await Order.exists({
+    const hasPurchased = await orderSchema.exists({
         user: userId,
         "orderItems.product": productId,
     });
@@ -151,16 +152,12 @@ const getReviews = asyncWrapper(async (req, res) => {
 
 const getSpecificReview = asyncWrapper(async (req, res) => {
     const {productId, reviewId } = req.params;
-    
+
     const product = await productSchema.findById(productId);
-    const review = await reviewSchema.findById({ productId, reviewId });
-    
-    if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-    }
-    
-    if (!review) {
-        return res.status(404).json({ message: 'Review not found' });
+    const review = await reviewSchema.find({ _id:reviewId, product: productId });
+
+    if(!product || !review || !review.length) {
+        return res.status(404).json({ message: 'Product or review not found' });
     }
 
     return res.status(200).json({ message: 'Review found', review });

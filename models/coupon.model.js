@@ -7,7 +7,7 @@ const couponSchema = new mongoose.Schema({
         unique:true,
     },
     description:{
-        types: String,
+        type: String,
         required:true,
         minlength:2,
         maxlength:50,
@@ -45,6 +45,14 @@ const couponSchema = new mongoose.Schema({
     isActive:{
         type:Boolean,
         default:true,
+    },
+    updatedBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+    },
+    createdBy:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User",
     }
 },{timestamps:true});
 
