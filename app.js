@@ -16,6 +16,7 @@ import userRouter from './routes/user.route.js';
 import productRouter from './routes/product.route.js';
 import reviewRouter from './routes/review.route.js';
 import couponRouter from './routes/coupon.route.js';
+import orderRouter from './routes/order.route.js';
 
 const __dirname = import.meta.dirname;
 const app = express();
@@ -37,6 +38,7 @@ app.use(`${apiVersion}/user`, userRouter);
 app.use(`${apiVersion}/product`, productRouter);
 app.use(`${apiVersion}/review`,reviewRouter);
 app.use(`${apiVersion}/coupon`,couponRouter)
+app.use(`${apiVersion}/order`,orderRouter)
 
 // Created middlewares
 app.use((req, res, next) => {

@@ -56,6 +56,7 @@ const productSchema = new mongoose.Schema({
                 message: "Each image must be a valid image URL.",
             },
         ],
+        default:'https://res.cloudinary.com/dnbveg7fm/image/upload/v1747030546/image_2025-05-12_114544896_rewxhv.png'
     },
     rating: {
         type: Number,
