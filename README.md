@@ -134,9 +134,14 @@ This project utilizes modern JavaScript technologies for a robust backend soluti
 | **Mongoose**   | ODM (Object Data Modeling) for MongoDB   |
 | **JWT**        | JSON Web Tokens for user authentication  |
 | **Multer**     | Middleware for file uploads              |
-| **dotenv**     | Manage environment variables             |
+| **Dotenv**     | Manage environment variables             |
 | **Cors**       | Cross-Origin Resource Sharing            |
 | **Nodemon**    | Auto-reloading during development        |
+| **Swagger UI** | API documentation tool                   | 
+| **Cloudinary** | Cloudinary service for image hosting     |
+| **BcryptJs**   | Password hashing library                 |
+| **NodeMailer** | Email sending library                    |
+| **Helmet**     | Helmet for security headers              |
 
 ---
 
@@ -144,30 +149,65 @@ This project utilizes modern JavaScript technologies for a robust backend soluti
 
 ```
 ecommerce-backend/
+│   .env                            #Stores all the Env Variables
+│   .gitignore
+│   access.log
+│   app.js                  
+│   ecommerceApi.txt                #Description of the project
+│   index.js                        #Main Application Entry Point
+│   package-lock.json
+│   package.json
+│   README.md
+│   swaggerUi.yaml                  #Swagger UI for API Documentation
+│       
+├───constants
+│       baseUrls.constant.js        #Stores BaseUrls
+│       cloudinary.constant.js      #Stores Cloudinary Configs
+│       nodemailer.constant.js      #Stores Nodemailer Configs
+│       
+├───controllers                     #Controllers for API endpoints
+│       auth.controller.js      
+│       coupon.controller.js
+│       order.controller.js
+│       product.controller.js
+│       review.controller.js
+│       user.controller.js
 │
-├── controllers/          # Route handlers
-│   ├── authController.js
-│   ├── userController.js
-│   └── productController.js
+├───database
+│       db.js                       #Database Connection
 │
-├── models/               # Mongoose models
-│   ├── User.js
-│   └── Product.js
+├───middlewares
+│       globalError.middleware.js   #Handles global Error
+│       multer.middleware.js        #Handles file uploads
+│       token.middleware.js         #Middleware for JWT verification
 │
-├── routes/               # API routes
-│   ├── authRoutes.js
-│   └── productRoutes.js
+├───models                          #Models for database entities
+│       coupon.model.js
+│       order.model.js
+│       product.model.js
+│       review.model.js
+│       user.model.js
 │
-├── middlewares/          # Custom Express middleware
-│   ├── authMiddleware.js
-│   └── errorHandler.js
+├───routes                          #Routes for API endpoints
+│       auth.route.js
+│       coupon.route.js
+│       order.route.js
+│       product.route.js
+│       review.route.js
+│       user.route.js
 │
-├── uploads/              # Image storage for uploaded files
+├───templates
+│       verifyEmail.template.js     #Template for verification email template
 │
-├── config/               # Environment & DB setup
-│   └── db.js
-│
-└── server.js             # Entry point to the server
+├───uploads
+└───utils
+        apiError.utils.js           #API Error Handling Utility
+        asyncWrapper.utils.js       #Async Wrapper Utility
+        badRequest.utils.js         #Bad Request Handling Utility
+        cloudinary.utils.js         #Cloudinary Utility
+        createAdmin.utils.js        #Create Admin User Utility
+        files.utils.js              #File Upload Utility
+        notFound.utils.js           #Not Found Utility
 ```
 
 ---
