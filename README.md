@@ -1,7 +1,3 @@
-Here’s an improved, more professional, and visually appealing version of your `README.md` with added sections and enhanced readability:
-
----
-
 # 🛒 E-commerce Backend API
 
 This repository houses the backend implementation of a scalable and modular **E-commerce Platform** built using **Node.js**, **Express.js**, and **MongoDB**. Designed with **RESTful** principles, this API can easily be integrated with frontend technologies such as React, Angular, or even mobile applications.
