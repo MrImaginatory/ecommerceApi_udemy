@@ -334,7 +334,7 @@ All API endpoints are prefixed with `/api/v1/`.
 
 ---
 ### DB ER DIAGRAM
-[![ErDiagram](https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.png)]((https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.png))
+[![ErDiagram](https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.svg)]((https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.svg))
 ---
 
 ### 📝 **Notes**
