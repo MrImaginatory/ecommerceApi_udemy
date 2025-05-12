@@ -333,6 +333,9 @@ All API endpoints are prefixed with `/api/v1/`.
 | PUT    | `/order/updateOrder/:orderId` | Update an existing order |
 
 ---
+### DB ER DIAGRAM
+[![ErDiagram](https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.png)]((https://github.com/MrImaginatory/ecommerceApi_udemy/blob/main/EcommerceAPI.png))
+---
 
 ### 📝 **Notes**
 
