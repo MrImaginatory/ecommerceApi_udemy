@@ -6,7 +6,7 @@ const orderRouter = Router();
 orderRouter.use(checkToken);
 
 orderRouter.route('/createOrder').post(createOrder);
-orderRouter.route('/updateOrder/:orderId').put(updateOrder);
+orderRouter.route('/updateOrder/:id').put(updateOrder);
 orderRouter.route('/viewOrder/:orderId').get(viewOrder);
 orderRouter.route('/orders').get(orders);
 

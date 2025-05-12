@@ -117,7 +117,7 @@ const createOrder = asyncWrapper(async (req, res) => {
 });
 
 const updateOrder = asyncWrapper(async (req, res) => {
-    const orderId = req.params;
+    const { id: orderId } = req.params;
     const userId = req.user._id;
 
     const {
